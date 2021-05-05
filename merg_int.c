@@ -1,9 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/time.h>
+#include "main.h"
+#include "merge.h"
 
 #define TEST_DATA_CNT 1000000
-void merge(int arr[],int head,int mid,int tail){
+void merge_int(int arr[],int head,int mid,int tail){
 	int lenL = mid - head + 1;
 	int lenR = tail - mid;
 	int left[lenL+1],right[lenR+1];
@@ -37,12 +36,12 @@ void merge(int arr[],int head,int mid,int tail){
 		j++;
 	}
 }
-void merge_sort(int arr[], int head, int tail){
+void merge_sort_int(int arr[], int head, int tail){
 	if(head < tail){
 		int mid = (head + tail) / 2;
-		merge_sort(arr, head, mid);
-		merge_sort(arr, mid+1, tail);
-		merge(arr, head, mid, tail);
+		merge_sort_int(arr, head, mid);
+		merge_sort_int(arr, mid+1, tail);
+		merge_int(arr,head, mid, tail);
 	}
 }
 int main(){
@@ -55,7 +54,7 @@ int main(){
 	struct  timeval end;
 	unsigned  long diff;
 	gettimeofday(&start, NULL);
-	merge_sort(test_data,0,TEST_DATA_CNT-1);
+	merge_sort_int(test_data,0,TEST_DATA_CNT-1);
 	gettimeofday(&end, NULL);
 	diff = 1000000 * (end.tv_sec - start.tv_sec) + end.tv_usec - start.tv_usec;
 	printf("merge sort(int): %ld us (equal %f sec)\n", diff, diff / 1000000.0);

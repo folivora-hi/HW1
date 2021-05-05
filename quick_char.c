@@ -1,7 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/time.h>
-#include <string.h>
+#include "main.h"
+#include "quick_char.h"
 #define TEST_DATA_CNT 1000000
 
 char test_data[TEST_DATA_CNT][100];

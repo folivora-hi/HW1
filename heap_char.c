@@ -1,10 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/time.h>
+#include "main.h"
+#include "heap.h"
 #define TEST_DATA_CNT 1000000
 char test_data[TEST_DATA_CNT][100];
-void swap(char *a, char *b){
+void swap_string(char *a, char *b){
 	char temp;
 	for(int i = 0; i < 100; i++){
 	        temp = *a;
@@ -13,7 +11,7 @@ void swap(char *a, char *b){
 	        a++,b++;
 	}
 }
-void heapify(int root,int size){
+void heapify_char(int root,int size){
 	int max = root;
 	int leftChild = 2*root + 1;
 	int rightChild = 2*root +2;
@@ -24,18 +22,18 @@ void heapify(int root,int size){
 	        max = rightChild;
 	}
 	if(max != root){
-	        swap(test_data[root],test_data[max]);
-	        heapify(max,size);
+	        swap_string(test_data[root],test_data[max]);
+	        heapify_char(max,size);
 	}
 }
-void heap_sort(int size){
+void heap_sort_char(int size){
 	int i;
 	for(i = size/2-1; i >= 0; i--){
-	        heapify(i,size);
+	        heapify_char(i,size);
 	}
 	for(i = size-1; i > 0; i--){
-	        swap(test_data[0],test_data[i]);
-	        heapify(0,i);
+	        swap_string(test_data[0],test_data[i]);
+	        heapify_char(0,i);
 	}
 }
 int main(){
@@ -48,7 +46,7 @@ int main(){
 	struct  timeval end;
 	unsigned  long diff;
 	gettimeofday(&start, NULL);
-	heap_sort(size);
+	heap_sort_char(size);
 	gettimeofday(&end, NULL);
 	diff = 1000000 * (end.tv_sec - start.tv_sec) + end.tv_usec - start.tv_usec;
 	printf("heap sort(str): %ld us (equal %f sec)\n", diff, diff / 1000000.0);

@@ -1,6 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/time.h>
+#include "main.h"
+#include "quick.h"
 
 #define TEST_DATA_CNT 100000
 void swap(int *a, int *b){
